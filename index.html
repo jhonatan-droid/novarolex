@@ -40,13 +40,34 @@
       </div>
     </nav>
   </header> <!-- FIN SECCION DE ENCABEZADO -->
-
-
-
-  <div class="container-fluid w-75 "> <!-- INICIO IMAGEN PRINCIPAL -->
-      <img src="./img/imagen_2.webp" class="img-fluid rounded-pill border border-5 shadow-lg" alt="img_principal">
-  </div> <!-- FIN IMAGEN PRINCIPAL -->
-
+  <div class="container-fluid"><!-- INICIO IMAGEN PRINCIPAL -->
+    <div id="carouselExampleIndicators" class="carousel slide">
+      <div class="carousel-indicators">
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></  button>
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></  button>
+     </div>
+     <div class="carousel-inner">
+       <div class="carousel-item active">
+          <img src="./img/principal.png" class="img-fluid rounded-pill border border-5 shadow-lg" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./img/principal2.png" class="img-fluid rounded-pill border border-5 shadow-lg" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./img/principal3.png" class="img-fluid rounded-pill border border-5 shadow-lg" alt="...">
+        </div>
+     </div>
+     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+       <span class="visually-hidden">Previous</span>
+     </button>
+     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+       <span class="visually-hidden">Next</span>
+     </button>
+   </div>
+  </div><!-- FIN IMAGEN PRINCIPAL -->
   <br><br><br>
  
   <section class="container-fluid text-center"> <!-- INICIO SECCION DE MARCAS -->
