@@ -1,183 +1,183 @@
+// 1. Declarar las variables
+let carrito = [];
+const itemsContainer = document.getElementById('items');
+const carritoContainer = document.getElementById('carrito');
+const totalElement = document.getElementById('total');
+const vaciarCarritoButton = document.getElementById('boton-vaciar');
 
-//DOM
-document.addEventListener('DOMContentLoaded', () => { 
-    // Variables
-    const baseDeDatos = [
-        {
-            id: 1,
-            nombre: 'Sombrero vueltiao con la bandera de Colombia, 23 vueltas',
-            precio: 250000,
-            imagen: 'assets/img/feature_prod_01.jpg',
-            categoria: 'sombreros'
-        },
-        {
-            id: 2,
-            nombre: 'Sombrero vueltiao-machiembriao',
-            precio: 150000,
-            imagen: 'assets/img/sombrero4.jpg',
-            categoria: 'sombreros'
-        },
-        {
-            id: 3,
-            nombre: 'Sombrero vueltiao colombiano 15 vueltas tricolor',
-            precio: 250000,
-            imagen: 'assets/img/feature_prod_02.jpg',
-            categoria: 'sombreros'
-        },
-        {
-            id: 4,
-            nombre: 'Mochila wayuu azul 6',
-            precio: 120000,
-            imagen: 'assets/img/shop_04.jpg',
-            categoria: 'mochilas'
-        },
-        {
-            id: 5,
-            nombre: 'Bolso en fique',
-            precio: 120000,
-            imagen: 'assets/img/shop_03.jpg',
-            categoria: 'bolsos'
-        },
-        {
-            id: 6,
-            nombre: 'Hamaca',
-            precio: 120000,
-            imagen: 'assets/img/category_img_02.jpg',
-            categoria: 'hamacas'
-        }
-    ];
+// 2. Declarar las funciones
 
-    let carrito = [];
-    const divisa = '$';
-    const DOMitems = document.querySelector('#items');
-    const DOMcarrito = document.querySelector('#carrito');
-    const DOMtotal = document.querySelector('#total');
-    const DOMbotonVaciar = document.querySelector('#boton-vaciar');
-    const miLocalStorage = window.localStorage;
-    const filtroSelect = document.getElementById("filtro");
-
-    // Funciones
-
-    function renderizarProductos() {
-        DOMitems.innerHTML = "";
-        const filtro = filtroSelect.value;
-        const productosFiltrados = baseDeDatos.filter(producto => 
-            filtro === "todas" || producto.categoria === filtro
-        );
-        productosFiltrados.forEach((info) => {
-            const miNodo = document.createElement('div');
-            miNodo.classList.add('card', 'col-sm-4');
-            const miNodoCardBody = document.createElement('div');
-            miNodoCardBody.classList.add('card-body');
-            const miNodoTitle = document.createElement('h6');
-            miNodoTitle.classList.add('card-title');
-            miNodoTitle.textContent = info.nombre;
-            const miNodoImagen = document.createElement('img');
-            miNodoImagen.classList.add('img-fluid');
-            miNodoImagen.setAttribute('src', info.imagen);
-            const miNodoPrecio = document.createElement('p');
-            miNodoPrecio.classList.add('card-text');
-            miNodoPrecio.textContent = `${info.precio}${divisa}`;
-            const miNodoBoton = document.createElement('button');
-            miNodoBoton.classList.add('btn', 'btn-primary');
-            miNodoBoton.textContent = 'Agregar';
-            miNodoBoton.setAttribute('marcador', info.id);
-            miNodoBoton.addEventListener('click', anadirProductoAlCarrito);
-            miNodoCardBody.appendChild(miNodoImagen);
-            miNodoCardBody.appendChild(miNodoTitle);
-            miNodoCardBody.appendChild(miNodoPrecio);
-            miNodoCardBody.appendChild(miNodoBoton);
-            miNodo.appendChild(miNodoCardBody);
-            DOMitems.appendChild(miNodo);
-        });
+// Función para agregar un producto al carrito
+function agregarAlCarrito(producto) {
+    const existe = carrito.some(item => item.id === producto.id);
+    if (existe) {
+        const index = carrito.findIndex(item => item.id === producto.id);
+        carrito[index].cantidad++;
+    } else {
+        carrito.push({ ...producto, cantidad: 1 });
     }
-// ObtÃ©n el contador del almacenamiento local
-    let visitas = localStorage.getItem('contadorVisitas');
-// Si no hay visitas almacenadas, inicializa a 0
-    if (!visitas) {
-        visitas = 0;
-    }
-// Incrementa el contador
-    visitas++;
-// Guarda el nuevo contador en el almacenamiento local
-    localStorage.setItem('contadorVisitas', visitas);
-// Muestra el contador en la pÃ¡gina
-    document.getElementById('contador').textContent = visitas;
-    function anadirProductoAlCarrito(evento) {
-        carrito.push(evento.target.getAttribute('marcador'));
-        renderizarCarrito();
-        guardarCarritoEnLocalStorage();
-        handleCarritoValue(carrito.length);
-    }
-    function handleCarritoValue(value) {
-        const carritoContainer = document.getElementById("carrito-value");
-        carritoContainer.textContent = `${value}`;
-    }
-    function renderizarCarrito() {
-        DOMcarrito.textContent = '';
-        const carritoSinDuplicados = [...new Set(carrito)];
-        carritoSinDuplicados.forEach((item) => {
-            const miItem = baseDeDatos.filter((itemBaseDatos) => {
-                return itemBaseDatos.id === parseInt(item);
-            });
-            const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-                return itemId === item ? total += 1 : total;
-            }, 0);
-            const miNodo = document.createElement('li');
-            miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-            miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
-            const miBoton = document.createElement('button');
-            miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-            miBoton.textContent = 'X';
-            miBoton.style.marginLeft = '1rem';
-            miBoton.dataset.item = item;
-            miBoton.addEventListener('click', borrarItemCarrito);
-            miNodo.appendChild(miBoton);
-            DOMcarrito.appendChild(miNodo);
-        });
-        DOMtotal.textContent = calcularTotal();
-    }
-    //borra carrito
-    function borrarItemCarrito(evento) {
-        const id = evento.target.dataset.item;
-        carrito = carrito.filter((carritoId) => {
-            return carritoId !== id;
-        });
-        renderizarCarrito();
-        guardarCarritoEnLocalStorage();
-        handleCarritoValue(carrito.length);
-    }
-    //calcular el total
-    function calcularTotal() {
-        return carrito.reduce((total, item) => {
-            const miItem = baseDeDatos.filter((itemBaseDatos) => {
-                return itemBaseDatos.id === parseInt(item);
-            });
-            return total + miItem[0].precio;
-        }, 0).toFixed(2);
-    }
-    //vaciar todos los elementos del carrito
-    function vaciarCarrito() {
-        carrito = [];
-        renderizarCarrito();
-        localStorage.clear();
-    }
-    //guardar en local el carrito
-    function guardarCarritoEnLocalStorage() {
-        miLocalStorage.setItem('carrito', JSON.stringify(carrito));
-    }
-    //cargar del local el carriro
-    function cargarCarritoDeLocalStorage() {
-        if (miLocalStorage.getItem('carrito') !== null) {
-            carrito = JSON.parse(miLocalStorage.getItem('carrito'));
-            handleCarritoValue(carrito.length);
-        }
-    }
-    // Eventos
-    DOMbotonVaciar.addEventListener('click', vaciarCarrito);
-    filtroSelect.addEventListener('change', renderizarProductos);
-    // Inicio
-    cargarCarritoDeLocalStorage();
-    renderizarProductos();
+    guardarCarritoEnLocalStorage();
     renderizarCarrito();
+}
+
+// Función para eliminar un producto del carrito
+function eliminarDelCarrito(id) {
+    carrito = carrito.filter(item => item.id !== id);
+    guardarCarritoEnLocalStorage();
+    renderizarCarrito();
+}
+
+// Función para vaciar el carrito
+function vaciarCarrito() {
+    carrito = [];
+    guardarCarritoEnLocalStorage();
+    renderizarCarrito();
+}
+
+// Función para calcular el total de los productos en el carrito
+function calcularTotal() {
+    const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    totalElement.textContent = total.toFixed(2);
+}
+
+// Función para renderizar el carrito en la página
+function renderizarCarrito() {
+    carritoContainer.innerHTML = '';
+    carrito.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex align-items-center';
+
+        // Agregar imagen del producto
+        const img = document.createElement('img');
+        img.src = item.imagen;
+        img.alt = item.nombre;
+        img.style.width = '120px';
+        img.style.height = '120px';
+        img.style.marginRight = '10px';
+
+        // Agregar detalles del producto
+        const details = document.createElement('div');
+        details.innerHTML = `
+            <strong>${item.nombre}</strong><br>
+            Cantidad: ${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}
+        `;
+
+        // Botón para eliminar el producto
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = 'Eliminar';
+        botonEliminar.className = 'btn btn-danger btn-sm ms-auto';
+        botonEliminar.onclick = () => eliminarDelCarrito(item.id);
+
+        li.appendChild(img);
+        li.appendChild(details);
+        li.appendChild(botonEliminar);
+        carritoContainer.appendChild(li);
+    });
+    calcularTotal();
+}
+
+// 3. Obtener el contador del almacenamiento local
+let contadorVisitas = localStorage.getItem('contadorVisitas');
+
+// 4. Si no hay visitas almacenadas, inicializa a 0
+if (!contadorVisitas) {
+    contadorVisitas = 0;
+}
+
+// 5. Incrementa el contador
+contadorVisitas++;
+
+// 6. Guarda el nuevo contador en el almacenamiento local
+localStorage.setItem('contadorVisitas', contadorVisitas);
+
+// 7. Muestra el contador en la página
+document.addEventListener('DOMContentLoaded', () => {
+    const contadorVisitasElement = document.getElementById('contador-visitas');
+    contadorVisitasElement.textContent = `Número de visitas: ${contadorVisitas}`;
 });
+
+// 8. Borrar carrito
+vaciarCarritoButton.addEventListener('click', vaciarCarrito);
+
+// 9. Calcular el total de los productos
+function calcularTotal() {
+    const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    totalElement.textContent = total.toFixed(2);
+}
+
+// 10. Vaciar todos los elementos del carrito
+function vaciarCarrito() {
+    carrito = [];
+    guardarCarritoEnLocalStorage();
+    renderizarCarrito();
+}
+
+// 11. Guardar en localStorage el carrito
+function guardarCarritoEnLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+// 12. Cargar del localStorage al carrito
+function cargarCarritoDesdeLocalStorage() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+        carrito = JSON.parse(carritoGuardado);
+        renderizarCarrito();
+    }
+}
+
+// 13. Eventos para los clicks
+document.addEventListener('DOMContentLoaded', () => {
+    // Agregar eventos a los botones "Agregar"
+    itemsContainer.addEventListener('click', e => {
+        if (e.target.tagName === 'BUTTON') {
+            const marcador = e.target.getAttribute('marcador');
+            const producto = productos.find(p => p.id == marcador);
+            agregarAlCarrito(producto);
+        }
+    });
+
+    cargarCarritoDesdeLocalStorage();
+});
+
+// 14. Inicio para llamar las funciones
+const productos = [
+    { 
+        id: 1, 
+        nombre: 'Reloj Casio Edifice Cronógrafo Hombre EFV-550P-1AVUEF', 
+        precio: 250000, 
+        imagen: './img/CASIO_Hombre.jpg' 
+    },
+    { 
+        id: 2, 
+        nombre: 'Invicta Sea Spider Chronograph Quartz Blue Dial', 
+        precio: 290000, 
+        imagen: './img/INVICTA_Azul.jpg' 
+    },
+    { 
+        id: 3, 
+        nombre: 'Invicta Bolt Chronograph Quartz Black Dial', 
+        precio: 310000, 
+        imagen: './img/INVICTA_Negro.jpg' 
+    },
+    { 
+        id: 4, 
+        nombre: 'Reloj Michael Kors 6403 para Dama Dorado', 
+        precio: 180000, 
+        imagen: './img/KORS_Dama.jpg' 
+    },
+    { 
+        id: 5, 
+        nombre: 'Reloj G-SHOCK GA-2100SKE-7A Carbono/Resina Hombre Transparente', 
+        precio: 270000, 
+        imagen: './img/Reloj_Transparente.jpg' 
+    },
+    { 
+        id: 6, 
+        nombre: "Invicta Men's Pro Diver Quartz Stainless Steel Two Tone Watch 26972", 
+        precio: 290000, 
+        imagen: './img/INVICTA_Metalico.jpg' 
+    }
+];
+
+
