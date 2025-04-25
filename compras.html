@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novarolex</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header class="shadow-lg mb-5 bg-body-tertiary rounded"> <!-- INICIO SECCION DE ENCABEZADO -->
+      <nav class="navbar navbar-expand-lg" style="background-color: #4E0E63; padding:1.5%;">
+        <div class="container-fluid">
+          <a class="navbar-link" href="index.html"><img src="./img/NovaRolex.png" alt="NovaRolex"  width="250" height="50" class="d-inline-block align-text-top"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:white; color:white;">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="index.html">Inicio</a></li>  
+              <li class="nav-item"><a class="nav-link text-white" href="./acerca.html">Acerca de</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="./productos.html">Productos</a></li>                
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ventas</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="ventas.html">Relojes Analogos</a></li>
+                  <li><a class="dropdown-item" href="ventas.html">Relojes Digitales</a></li>
+                  <li><a class="dropdown-item" href="ventas.html">SmartWatch</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link text-white" href="./contacto.html">Contacto</a></li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" style="color: white;  border-color:white">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header> <!-- FIN SECCION DE ENCABEZADO -->
+
+
+<!-- inicio de contenido -->
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <h1 class="h2 pb-4">Categorias</h1>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <strong>Genero</strong>
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>Nuestras colecciones están diseñadas para todos.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <strong>Ventas</strong>
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>Envíos Gratis en el día ✓ Compre Relojes en cuotas sin interés! ✓ Conozca nuestras increíbles ofertas y promociones en millones de productos.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <strong>Productos
+                    </button></strong>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>En NovaRolex, la calidad de nuestros productos es una obligación.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-lg-9">  
+            <div class="row"> <!-- INICIO SIMULACION DE FILTRO -->
+                <div class="col-md-6 pb-4">
+                    <div class="d-flex">
+                        <select id="filtro" class="form-control">
+                            <option value="todas">Todas</option>
+                            <option value="masculinos">Masculinos</option>
+                            <option value="femeninos">Femeninos</option>
+                            <option value="niños">Niños</option>
+                            <option value="smartwatch">SmartWatch</option>
+                        </select>
+                    </div>
+                </div>
+            </div> <!-- FIN SIMULACION DE FILTRO -->
+
+            <!-- productos en el carro -->
+            <!-- fin de productos -->
+             <!-- carrito -->
+             <div class="container">
+                <div class="row">
+                    
+                    <main id="items" class="col-sm-8 row"> <!-- PRODUCTOS GENERADOS -->
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/CASIO_Hombre.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Reloj Casio Edifice Cronógrafo Hombre EFV-550P-1AVUEF</h6>
+                                <p class="card-text">$ 250.000</p>
+                                <button class="btn btn-primary" id="1">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/INVICTA_Azul.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Invicta Sea Spider Chronograph Quartz Blue Dial</h6>
+                                <p class="card-text">$ 290.000</p>
+                                <button class="btn btn-primary" marcador="2">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/INVICTA_Negro.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Invicta Bolt Chronograph Quartz Black Dial</h6>
+                                <p class="card-text">$ 310.000</p>
+                                <button class="btn btn-primary" marcador="3">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/KORS_Dama.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Reloj Michael Kors 6403 para Dama Dorado</h6>
+                                <p class="card-text">$ 180.000</p>
+                                <button class="btn btn-primary" marcador="1">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/Reloj_Transparente.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Reloj G-SHOCK GA-2100SKE-7A Carbono/Resina Hombre Transparente</h6>
+                                <p class="card-text">$ 270.000</p>
+                                <button class="btn btn-primary" marcador="1">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div class="card col-sm-4 row">
+                            <div class="card-body">
+                                <img src="./img/INVICTA_Metalico.jpg" alt="" class="img-fluid">
+                                <h6 class="card-title">Invicta Men's Pro Diver Quartz Stainless Steel Two Tone Watch 26972</h6>
+                                <p class="card-text">$ 290.000</p>
+                                <button class="btn btn-primary" marcador="1">Agregar</button>
+                            </div>
+                        </div>
+
+                    </main>
+                    <!-- Carrito -->
+                    <aside class="col-sm-4">
+                        <h3>Carrito</h3>
+                        <!-- Elementos del carrito -->
+                        <ul id="carrito" class="list-group"></ul>
+                        <hr>
+                        <!-- PRECIO TOTAL -->
+                        <p class="text-right">Total: $ <span id="total"></span></p>
+                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                        <button class="btn btn-info">Pagar</button>
+                    </aside>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row"> <!-- INICIO DE PAGINACIÓN -->
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                    </li>
+                </ul>
+            </div> <!-- FIN DE PAGINACIÓN -->
+
+        </div>
+    </div>
+</div> <!-- final de contenido -->
+
+
+
+<footer style="background-color: #4E0E63"> <!-- INICIO PIE DE PAGINA -->
+    <br>
+    <div class="container-fluid text-left" style="background-color: #4E0E63">      
+      <div class="row align-items-start">
+        <div class="col text-white">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; font-size: x-large; font-weight: bold;">NOVAROLEX</li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; border-color: transparent;">Bogotá - Colombia</li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; border-color: transparent;"><a href="mailto:info@novarolex.com" style="text-decoration: none; color: white;">info@novarolex.com</a></li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63">+57 3203057122</li>
+          </ul>
+        </div>
+        <div class="col text-white">
+          <ul class="list-group list-group-flush" >
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; font-size: x-large; font-weight: bold;">PRODUCTOS</li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; border-color: transparent;"><a href="./ventas.html" style="text-decoration: none; color: white;">Relojes Analógicos</a></li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; border-color: transparent;"><a href="./ventas.html" style="text-decoration: none; color: white;">Relojes Digitales</a></li>
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; border-color: transparent;"><a href="./ventas.html" style="text-decoration: none; color: white;">SmartWatch</a></li>
+          </ul>
+        </div>
+      </div><br><hr style="color: white; border:5;">
+      <div class="row align-items-center">
+        <div class="col-1">
+          <ul class="list-group list-group-flush" >
+            <li class="list-group-item text-white text-start" style="background-color: #4E0E63; font-size: x-large; font-weight: bold;"></li>
+          </ul>
+        </div>
+        <div class="col">
+           <a href="https://www.facebook.com/" style="text-decoration: none; color: white; font-weight: bold;"><i class="bi bi-facebook"></i> Facebook</a>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <a href="https://www.instagram.com/" style="text-decoration: none; color: white; font-weight: bold;"><i class="bi bi-instagram"></i> Instagram</a>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <a href="https://www.youtube.com/" style="text-decoration: none; color: white; font-weight: bold;"><i class="bi bi-youtube"></i> Youtube</a>
+        </div>
+      </div>
+      <hr style="color: white; border:5;">
+      <h6 style="background-color: #381145; padding:1.5%; color:white">Copyright © 2025 - NovaRolex | Diseñado por: Jhonatan y Katherin</h6>
+    </div>
+  </footer> <!-- FIN PIE DE PAGINA -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  <script src="./js/carrito.js"></script>
+
+</body>
+</html>
