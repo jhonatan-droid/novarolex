@@ -7,7 +7,7 @@ const vaciarCarritoButton = document.getElementById('boton-vaciar');
 
 // 2. Declarar las funciones
 
-// Función para agregar un producto al carrito
+    // Función para agregar un producto al carrito
 function agregarAlCarrito(producto) {
     const existe = carrito.some(item => item.id === producto.id);
     if (existe) {
@@ -20,27 +20,27 @@ function agregarAlCarrito(producto) {
     renderizarCarrito();
 }
 
-// Función para eliminar un producto del carrito
+    // Función para eliminar un producto del carrito
 function eliminarDelCarrito(id) {
     carrito = carrito.filter(item => item.id !== id);
     guardarCarritoEnLocalStorage();
     renderizarCarrito();
 }
 
-// Función para vaciar el carrito
+    // Función para vaciar el carrito
 function vaciarCarrito() {
     carrito = [];
     guardarCarritoEnLocalStorage();
     renderizarCarrito();
 }
 
-// Función para calcular el total de los productos en el carrito
+    // Función para calcular el total de los productos en el carrito
 function calcularTotal() {
     const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     totalElement.textContent = total.toFixed(2);
 }
 
-// Función para renderizar el carrito en la página
+    // Función para renderizar el carrito en la página
 function renderizarCarrito() {
     carritoContainer.innerHTML = '';
     carrito.forEach(item => {
@@ -53,18 +53,18 @@ function renderizarCarrito() {
         img.alt = item.nombre;
         img.style.width = '120px';
         img.style.height = '120px';
-        img.style.marginRight = '10px';
+        img.style.marginLeft = 'none';
 
         // Agregar detalles del producto
         const details = document.createElement('div');
         details.innerHTML = `
             <strong>${item.nombre}</strong><br>
-            Cantidad: ${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}
+            Cantidad: ${item.cantidad} $${(item.precio * item.cantidad)}
         `;
 
         // Botón para eliminar el producto
         const botonEliminar = document.createElement('button');
-        botonEliminar.textContent = 'Eliminar';
+        botonEliminar.textContent = 'X';
         botonEliminar.className = 'btn btn-danger btn-sm ms-auto';
         botonEliminar.onclick = () => eliminarDelCarrito(item.id);
 
